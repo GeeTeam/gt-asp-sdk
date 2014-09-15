@@ -1,10 +1,9 @@
-<!--#include file="./geetest_Md5.asp"-->
 <!--#include file="./Geetestlib.asp"-->
 <%
 Dim result,geetest_challenge,geetest_validate,geetest_seccode
 Dim geetest
 
-Set geetest = new Geetestlib
+Set geetest = (new Geetestlib)("55e100f0bd6cc6279d47b80b3ccedbf7")
 geetest_challenge = Request("geetest_challenge")
 geetest_validate = Request("geetest_validate")
 geetest_seccode = Request("geetest_seccode")
