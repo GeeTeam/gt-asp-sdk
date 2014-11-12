@@ -1,5 +1,5 @@
-
-    <!DOCTYPE html>
+<!--#include file="./Geetestlib.asp"-->
+ <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -17,7 +17,16 @@
           <td>密码</td><td><input type="password"/></td>
        </tr>
        <tr>
-          <td colspan="2"><script type="text/javascript" src="http://api.geetest.com/get.php?gt=eec109e39008039b1f59dc812b55988d"></script></td>
+	   <%
+				Dim geetest,server_status
+				Set geetest = new Geetestlib
+				server_status = geetest.getGtServerStatus()
+				If server_status = 1 Then
+					Response.Write("<td colspan='2'><script type='text/javascript' src='http://api.geetest.com/get.php?gt=eec109e39008039b1f59dc812b55988d'></script></td>")
+				Else
+					' Todo
+				End If
+		  %>
        </tr>
        <tr>
           <td>

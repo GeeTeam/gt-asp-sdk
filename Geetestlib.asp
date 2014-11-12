@@ -1,8 +1,4 @@
 <%
-
-
-
-
 Class Geetestlib
 
 Public privateKey
@@ -15,6 +11,32 @@ End Function
 Private Sub Class_Terminate()
 	
 End Sub
+
+Public Function getGtServerStatus()
+	Dim url,result,sMyXmlHTTP
+	url = "http://api.geetest.com/check_status.php"
+	Set sMyXmlHTTP = Server.CreateObject("MSXML2.ServerXMLHTTP")
+	sMyXmlHTTP.Open "GET", url, False
+	sMyXmlHTTP.send
+	If sMyXmlHTTP.responseText = "ok" Then
+		getGtServerStatus = 1
+	Else
+		getGtServerStatus = 0
+	End If
+End Function
+
+Public Function requestIsLegal(request)
+	requestIsLegal = True
+	If request("geetest_challenge")="" Or request("geetest_challenge") = null Then
+		requestIsLegal = False
+	End If
+	If request("geetest_validate")="" Or request("geetest_validate") = null Then
+		requestIsLegal = False
+	End If
+	If request("geetest_seccode")="" Or request("geetest_seccode") = null Then
+		requestIsLegal = False
+	End If
+End Function
 
 Public Function CheckValidate(challenge,validate,seccode)
 	Dim host,path,port,query,responseText
@@ -44,10 +66,9 @@ End Function
 
 Private Function postValidate(host, path, data, port)
 	Dim url,sMyXmlHTTP
-	url = host & path
-	
+	url = host & path	
 	Set sMyXmlHTTP = Server.CreateObject("MSXML2.ServerXMLHTTP")
-	sMyXmlHTTP.Open "POST", url, False
+	sMyXmlHTTP.Open "POST",url,False
 	sMyXmlHTTP.setRequestHeader "Content-Length", Len(data)
 	sMyXmlHTTP.setRequestHeader "Content-Type", "application/x-www-form-urlencoded;"
 	sMyXmlHTTP.send data
