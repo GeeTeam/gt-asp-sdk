@@ -18,11 +18,15 @@
        </tr>
        <tr>
 	   <%
-				Dim geetest,server_status
+				Dim geetest,server_status, api_script
 				Set geetest = new Geetestlib
+				geetest.captchaid = "eec109e39008039b1f59dc812b55988d"
+				
 				server_status = geetest.getGtServerStatus()
 				If server_status = 1 Then
-					Response.Write("<td colspan='2'><script type='text/javascript' src='http://api.geetest.com/get.php?gt=eec109e39008039b1f59dc812b55988d'></script></td>")
+					geetest.register()
+					api_script = "<td colspan='2'><script type='text/javascript' src='http://api.geetest.com/get.php?gt=eec109e39008039b1f59dc812b55988d&challenge=" + geetest.challenge + "'></script></td>"
+					Response.Write(api_script)
 				Else
 					' Todo
 				End If

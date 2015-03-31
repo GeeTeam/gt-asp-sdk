@@ -2,6 +2,10 @@
 Class Geetestlib
 
 Public privateKey
+Public captchaID
+Public challenge
+Public productType
+Public popupBtnID
 
 public Default Function Construtor(key)
   privateKey = key
@@ -24,6 +28,19 @@ Public Function getGtServerStatus()
 		getGtServerStatus = 0
 	End If
 End Function
+
+Public Function register()
+	Dim url,result,sMyXmlHTTP
+	url = "http://api.geetest.com/register.php?gt=" + captchaID
+	Set sMyXmlHTTP = Server.CreateObject("MSXML2.ServerXMLHTTP")
+	sMyXmlHTTP.Open "GET", url, False
+	sMyXmlHTTP.send
+	If Len(sMyXmlHTTP.responseText)=32 Then
+		challenge = sMyXmlHTTP.responseText
+	End If
+End Function
+
+
 
 Public Function requestIsLegal(request)
 	requestIsLegal = True
