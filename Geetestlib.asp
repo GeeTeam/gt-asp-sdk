@@ -6,7 +6,7 @@ Public captchaID
 Public challenge
 Public productType
 Public popupBtnID
-
+Public version = "2.14.5.1"
 public Default Function Construtor(key)
   privateKey = key
   Set Construtor = Me
@@ -84,6 +84,7 @@ End Function
 Private Function postValidate(host, path, data, port)
 	Dim url,sMyXmlHTTP
 	url = host & path	
+	data = data + "&sdklang=asp&sdk=" + version
 	Set sMyXmlHTTP = Server.CreateObject("MSXML2.ServerXMLHTTP")
 	sMyXmlHTTP.Open "POST",url,False
 	sMyXmlHTTP.setRequestHeader "Content-Length", Len(data)
