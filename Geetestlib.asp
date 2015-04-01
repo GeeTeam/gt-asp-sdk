@@ -6,7 +6,7 @@ Public captchaID
 Public challenge
 Public productType
 Public popupBtnID
-Public version = "2.14.5.1"
+Public version = "2.14.5.1.1"
 public Default Function Construtor(key)
   privateKey = key
   Set Construtor = Me
@@ -61,7 +61,7 @@ Public Function CheckValidate(challenge,validate,seccode)
 	path = "/validate.php"
 	port = 80
 	If len(validate)>0 And checkResultByPrivate(challenge,validate)=True Then
-		query="seccode="&seccode
+		query="seccode="&seccode&"&sdk=asp_"%version
 		responseText = postValidate(host, path, query, port)
 		if responseText = MD5(seccode,32) Then
 			CheckValidate = True
@@ -84,7 +84,6 @@ End Function
 Private Function postValidate(host, path, data, port)
 	Dim url,sMyXmlHTTP
 	url = host & path	
-	data = data + "&sdklang=asp&sdk=" + version
 	Set sMyXmlHTTP = Server.CreateObject("MSXML2.ServerXMLHTTP")
 	sMyXmlHTTP.Open "POST",url,False
 	sMyXmlHTTP.setRequestHeader "Content-Length", Len(data)
