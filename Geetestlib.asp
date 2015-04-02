@@ -6,7 +6,7 @@ Public captchaID
 Public challenge
 Public productType
 Public popupBtnID
-Public version = "2.14.5.1.1"
+Public version = "2.15.4.1.1"
 public Default Function Construtor(key)
   privateKey = key
   Set Construtor = Me
