@@ -6,9 +6,10 @@ Public captchaID
 Public challenge
 Public productType
 Public popupBtnID
-Public version = "2.15.4.1.1"
+Public version
 public Default Function Construtor(key)
   privateKey = key
+  version = "2.15.4.8.1"
   Set Construtor = Me
 End Function
 
@@ -61,7 +62,7 @@ Public Function CheckValidate(challenge,validate,seccode)
 	path = "/validate.php"
 	port = 80
 	If len(validate)>0 And checkResultByPrivate(challenge,validate)=True Then
-		query="seccode="&seccode&"&sdk=asp_"%version
+		query="seccode="&seccode&"&sdk=asp_"&version
 		responseText = postValidate(host, path, query, port)
 		if responseText = MD5(seccode,32) Then
 			CheckValidate = True
